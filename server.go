@@ -39,19 +39,24 @@ func GetResult(ctx echo.Context) error {
 	number := ctx.Param("count")
 	count, _ := strconv.Atoi(number)
 
-	var result []string
+	var fizzBuzzArray []string
+
+	//result := map[string]interface{}{}
+	result := map[string][]string{}
 
 	for i := 1; i <= count; i++ {
-		if i % 3 == 0 && i % 5 == 0{
-			result = append(result, "FizzBuzz")
+		if i % 15 == 0{
+			fizzBuzzArray = append(fizzBuzzArray, "FizzBuzz")
 		} else if i % 3 == 0{
-			result = append(result, "Fizz")
+			fizzBuzzArray = append(fizzBuzzArray, "Fizz")
 		} else if i % 5 == 0{
-			result = append(result, "Buzz")
+			fizzBuzzArray = append(fizzBuzzArray, "Buzz")
 		} else{
-			result = append(result, strconv.Itoa(i))
+			fizzBuzzArray = append(fizzBuzzArray, strconv.Itoa(i))
 		}
 	}
+
+	result["fizzbuzz"] = fizzBuzzArray
 
 	status := http.StatusOK
 	return ctx.JSON(status, result)
